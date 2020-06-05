@@ -86,13 +86,17 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     lat2 = float(lat2)
     lon2 = float(lon2)
   except:
-    return("Please enter valid numbers.")
+  # tests for valid input
+    print("Please enter valid numbers")
+    return("Try running the function again")
+
   for city in cities:
     if (max(lat, lat2) >= city.lat >= min(lat, lat2)) and (max(lon, lon2) >= city.lon >= min(lon, lon2)):
       within.append(city)
 
   return within
 
+# User input is requested if run from the command line.
 if __name__ == '__main__':
   user_lat = input("Enter a latitude: ")
   user_long = input("Enter a longitude: ")
@@ -101,5 +105,12 @@ if __name__ == '__main__':
 
   between_cities = cityreader_stretch(user_lat, user_long, user_lat2, user_long2, cities)
 
-  for city in between_cities:
-    print(f"{city.name}: ({city.lat}, {city.lon})")
+  # checks for valid input
+  if between_cities != "Try running the function again":
+
+    for city in between_cities:
+      print(f"{city.name}: ({city.lat}, {city.lon})")
+
+  # if input invalid, prints predefined error message
+  else:
+    print(between_cities)
