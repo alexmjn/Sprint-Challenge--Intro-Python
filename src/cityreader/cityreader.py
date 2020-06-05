@@ -77,7 +77,7 @@ for c in cities:
 # TODO Get latitude and longitude values from the user
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-"""Takes latitude and longitude pairs and returns cities between."""
+  """Takes latitude and longitude pairs and returns cities between."""
   within = []
 
   try:
@@ -85,23 +85,21 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     lon = float(lon1)
     lat2 = float(lat2)
     lon2 = float(lon2)
-
-    for city in cities:
-      if (max(lat, lat2) >= city.lat >= min(lat, lat2)) and (max(lon, lon2) >= city.lon >= min(lon, lon2)):
-        within.append(city)
-
   except:
     return("Please enter valid numbers.")
+  for city in cities:
+    if (max(lat, lat2) >= city.lat >= min(lat, lat2)) and (max(lon, lon2) >= city.lon >= min(lon, lon2)):
+      within.append(city)
 
   return within
 
+if __name__ == '__main__':
+  user_lat = input("Enter a latitude: ")
+  user_long = input("Enter a longitude: ")
+  user_lat2 = input("Enter a second latitude: ")
+  user_long2 = input("Enter a second longitude: ")
 
-user_lat = input("Enter a latitude")
-user_long = input("Enter a longitude")
-user_lat2 = input("Enter a second latitude")
-user_long2 = input("Enter a second longitude")
+  between_cities = cityreader_stretch(user_lat, user_long, user_lat2, user_long2, cities)
 
-between_cities = cityreader_stretch(user_lat, user_long, user_lat2, user_long2, cities)
-
-for city in between_cities:
-  print(f"{city.name}: ({city.lat}, {city.lon})")
+  for city in between_cities:
+    print(f"{city.name}: ({city.lat}, {city.lon})")
